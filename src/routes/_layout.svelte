@@ -12,6 +12,12 @@
   export let segment;
 </script>
 
+<Nav {segment} {user} />
+
+<main>
+  <slot />
+</main>
+
 <style>
   /* main {
 		position: relative;
@@ -22,9 +28,3 @@
 		box-sizing: border-box;
 	} */
 </style>
-
-<Nav {segment} {user} />
-
-<main>
-  <slot {user} />
-</main>

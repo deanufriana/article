@@ -2,37 +2,34 @@ import sirv from 'sirv';
 import express from 'express';
 import compression from 'compression';
 import * as sapper from '@sapper/server';
-import bodyParser from 'body-parser'
 import multer from 'multer'
 
 import User from './servers/models/user'
 import Article from './servers/models/article'
 import sequalize from './servers/utils/database'
 import session from 'express-session'
+import SequelizeStore from 'connect-session-sequelize'
 import { login, logout, profile, register } from './servers/controllers/auth'
 import { addArticle, detailArticle, fetchArticle, searchArticle } from './servers/controllers/article'
-import MySQLStore from 'express-mysql-session'
 
 const app = express()
 const upload = multer({ dest: 'static/avatars' })
-const { PORT, NODE_ENV } = process.env;
+const { PORT, NODE_ENV, secretKey } = process.env;
+const storeSequelize = SequelizeStore(session.Store);
 const dev = NODE_ENV === 'development';
 
 app.use(session({
-	secret: 'articleapp',
-	store: new MySQLStore({
-		host: 'localhost',
-		port: 3306,
-		user: 'root',
-		password: 'silkyheart09',
-		database: 'article'
+	secret: secretKey,
+	store: new storeSequelize({
+		db: sequalize,
 	}),
 	cookie: { secure: false, expires: 28800000, httpOnly: false },
 	resave: false,
 	saveUninitialized: false
-}))
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+}));
+
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 
 app.post('/login', login)
 app.post('/logout', logout)
@@ -60,5 +57,4 @@ sequalize.sync({ force: false }).then(result => {
 		.listen(PORT, err => {
 			if (err) console.log('error', err);
 		});
-
 })

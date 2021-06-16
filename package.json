@@ -1,6 +1,6 @@
 {
-  "name": "TODO",
-  "description": "TODO",
+  "name": "article",
+  "description": "article is a just blog website",
   "version": "0.0.1",
   "scripts": {
     "dev": "sapper dev",
@@ -11,11 +11,9 @@
   "dependencies": {
     "@fortawesome/free-regular-svg-icons": "^5.15.0",
     "axios": "^0.20.0",
-    "body-parser": "^1.19.0",
-    "cl-editor": "^2.1.1",
     "compression": "^1.7.1",
+    "connect-session-sequelize": "^7.1.1",
     "express": "^4.17.1",
-    "express-mysql-session": "^2.1.4",
     "express-session": "^1.17.1",
     "moment": "^2.29.0",
     "multer": "^1.4.2",
@@ -25,8 +23,7 @@
     "sequelize": "^6.3.5",
     "sirv": "^1.0.0",
     "slugify": "^1.4.5",
-    "svelte-awesome": "^2.3.0",
-    "typewriter-editor": "^0.5.0"
+    "svelte-awesome": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

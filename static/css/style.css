@@ -77,6 +77,7 @@ select,
 .card {
   border: 1px solid #407088;
   margin-bottom: 10px;
+  border-radius: 4px;
 }
 
 .card-subtitle {
